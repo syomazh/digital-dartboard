@@ -12,7 +12,10 @@ npm install
 npm run dev
 ```
 
-Open the local URL printed by Vite, normally `http://localhost:5173`.
+Open the local URL printed by Vite, normally
+`http://localhost:5173/digital-dartboard/`. The path comes from the `base`
+setting in `vite.config.ts`, which GitHub Pages needs because the site is served
+from a repository subpath.
 
 ## Play
 
@@ -56,4 +59,15 @@ React, TypeScript, Vite, and Three.js. The wood, sisal board, paper, and metal
 darts are generated in code. Audio uses the Web Audio API. The 3D scene requires
 a browser with WebGL 2 support.
 
-The production output is `dist/` and can be hosted on any static web host.
+## Deployment
+
+`.github/workflows/deploy.yml` builds the site on every push to `main` and
+publishes `dist/` to GitHub Pages. The repository’s **Settings → Pages →
+Source** must be set to **GitHub Actions**; the default "Deploy from a branch"
+serves the unbuilt source and renders a blank page.
+
+If you fork or rename the repository, update `base` in `vite.config.ts` to match
+the new path, or the built asset URLs will 404.
+
+The production output is `dist/` and can be hosted on any static web host. For a
+host that serves from the domain root, set `base` back to `"/"`.
